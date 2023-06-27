@@ -24,3 +24,9 @@ class UnHandleRequest(DefaultException):
     def __init__(self, message="can't process the request."):
         self.message = message
         super().__init__(self.message)
+
+
+class AuthenticationError(DefaultException):
+    def __init__(self, message="Invalid email and password."):
+        self.message = message
+        super().__init__(self.message)

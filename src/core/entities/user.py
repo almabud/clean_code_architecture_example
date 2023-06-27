@@ -26,5 +26,5 @@ class User(BaseModel):
     def check_password(self, password):
         return bcrypt.checkpw(
             base64.b64encode(hashlib.sha256(password.encode()).digest()),
-            self.password
+            self.password.get_secret_value().encode()
         )

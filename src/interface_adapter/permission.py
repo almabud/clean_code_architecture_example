@@ -8,7 +8,7 @@ class BasePermission(ABC):
         self.request = request
 
     @abstractmethod
-    def has_permission(self,  request: Request) -> bool:
+    def has_permission(self) -> bool:
         pass
 
 
@@ -20,3 +20,8 @@ class AllowAny(BasePermission):
 class Authenticated(BasePermission):
     def has_permission(self) -> bool:
         return self.request.user.is_authenticated
+
+
+class UnAuthenticated(BasePermission):
+    def has_permission(self) -> bool:
+        return not self.request.user.is_authenticated

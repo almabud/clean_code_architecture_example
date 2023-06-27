@@ -19,5 +19,9 @@ class BaseRepo(ABC):
         pass
 
     @abstractmethod
+    def exists(self, **filters):
+        pass
+
+    @abstractmethod
     def build_entity_obj(self, data):
         pass

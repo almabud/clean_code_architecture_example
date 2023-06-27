@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.core.entities.request import Request, AnonymousUser
+from src.core.entities.request import Request, AnonymousUser, RequestUser
 from src.core.exceptions.exceptions import UnHandleRequest, DefaultException
 from src.core.usecases.get_user import GetUserUseCase
 from src.core.usecases.token_verify import TokenVerifyUseCase
@@ -36,6 +36,6 @@ class AuthenticationHandler(BaseRequestHandler):
             user = GetUserUseCase(
                 user_repo=user_repo, identifier=verify.payload.identifier
             ).execute()
-            self.request.user = user
+            self.request.user = RequestUser(**user.dict())
         except DefaultException as e:
             self.request.user = AnonymousUser()
