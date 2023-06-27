@@ -14,7 +14,7 @@ def urser_list():
     return jsonify(res.dict()), res.status_code
 
 
-@user.route("/users/", methods=["POST"])
+@user.route("/signup/", methods=["POST"])
 def create_user():
     res = SignUpController(
         {'data': request.json, **request.__dict__}
