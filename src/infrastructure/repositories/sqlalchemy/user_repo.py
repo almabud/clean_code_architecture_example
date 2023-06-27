@@ -1,6 +1,3 @@
-from operator import or_
-from typing import Optional, List
-
 from sqlalchemy import select
 
 from src.core.entities.user import User as UserEntity

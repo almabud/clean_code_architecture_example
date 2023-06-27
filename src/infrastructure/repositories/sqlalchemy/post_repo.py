@@ -1,10 +1,6 @@
-from operator import or_
-from typing import Optional, List
-
 from sqlalchemy import select
 
 from src.core.entities.post import Post as PostEntity
-from src.core.entities.user import User as UserEntity
 from src.core.exceptions.exceptions import NotFound
 from src.core.repositories.post_repo import PostRepo as BasePostRepo
 from src.infrastructure.repositories.sqlalchemy.models import (
@@ -30,17 +26,16 @@ class PostRepo(SqlAlchemyBaseRepo, BasePostRepo):
         return res
 
     def get(self, **filters):
-        filters = self.build_filters(Post, filters)
+        filters = self.build_filters(model=Post, filters=filters)
         res = None
         with Session() as session:
             res = session.execute(
-                select(User).where(*filters)
+                select(Post).where(*filters)
             ).scalar()
+            if not res:
+                raise NotFound('User not found.')
 
-        if not res:
-            raise NotFound('User not found.')
-
-        return self.build_entity_obj(res)
+            return self.build_entity_obj(res)
 
     def create(self, post: PostEntity):
         new_post = Post(
