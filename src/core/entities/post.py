@@ -1,6 +1,7 @@
 from typing import Any
 
 from .base import BaseModel
+from .user import User
 
 
 class Post(BaseModel):
@@ -10,4 +11,4 @@ class Post(BaseModel):
 
     @property
     def author_id(self):
-        return author.id
+        return self.author.id

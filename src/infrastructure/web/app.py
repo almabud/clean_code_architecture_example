@@ -7,7 +7,9 @@ def create_app(config_name):
 
     app = Flask(__name__)
 
-    config_module = f"web.config.{config_name.capitalize()}Config"
+    config_module = "src.infrastructure.web.config.{}Config".format(
+        config_name.capitalize()
+    )
 
     app.config.from_object(config_module)
 

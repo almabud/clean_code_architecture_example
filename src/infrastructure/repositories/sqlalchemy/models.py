@@ -1,25 +1,30 @@
 import uuid
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 from sqlalchemy import (
-    String, create_engine, Table, Column, Integer, ForeignKey, Boolean,
-    DateTime, Uuid, Text
+    String, create_engine, ForeignKey, DateTime, Uuid, Text, Boolean
 )
-from sqlalchemy.orm import Mapped, mapped_column, declarative_base, relationship
+from sqlalchemy.orm import (
+    Mapped, mapped_column, declarative_base, relationship, sessionmaker
+)
+
+from src.config import config
 
 Base = declarative_base()
+engine = create_engine(config.DB_URL)
+Session = sessionmaker(engine)
 
 
 class AbstractBaseModel(Base):
     __abstract__ = True
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     identifier: Mapped[Uuid] = mapped_column(
         Uuid, unique=True, default=uuid.uuid4
     )
-    updated_at: Mapped[DateTime] = mapped_column(
-        DateTime, default=datetime.now, onupdate=datetime.now
+    updated_at: Mapped[Optional[DateTime]] = mapped_column(
+        DateTime, default=None, onupdate=datetime.now
     )
     created_at: Mapped[DateTime] = mapped_column(
         DateTime, default=datetime.now
@@ -36,6 +41,7 @@ class User(AbstractBaseModel):
     posts: Mapped[List['Post']] = relationship(
         'Post', back_populates="author"
     )
+    is_superuser: Mapped[bool] = mapped_column(Boolean, default=False)
 
 
 class Post(AbstractBaseModel):

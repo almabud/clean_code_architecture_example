@@ -1,4 +1,4 @@
-from .repositories.user_repo import UserRepo
+from src.core.repositories.user_repo import UserRepo
 
 
 class ListUserUseCase:
@@ -6,5 +6,5 @@ class ListUserUseCase:
         self.user_repo = user_repo
     
     def execute(self, filter=None):
-        return  self.user_repo.list_()
+        return self.user_repo.list_()
     

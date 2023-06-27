@@ -1,7 +1,7 @@
 from uuid import uuid4
 from datetime import datetime
 
-from pydantic import BaseModel as DefaultModel, EmailStr, UUID4
+from pydantic import BaseModel as DefaultModel, UUID4
 
 
 class BaseModel(DefaultModel):
@@ -9,3 +9,7 @@ class BaseModel(DefaultModel):
     identifier: UUID4 = uuid4()
     created_at: datetime = datetime.now()
     updated_at: datetime = None
+
+    class Config:
+        orm_mode = True
+

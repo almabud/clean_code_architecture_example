@@ -1,16 +1,34 @@
 from logging.config import fileConfig
+import os
+from pathlib import Path
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
 
-from models import Base
+from src.infrastructure.repositories.sqlalchemy.models import Base
+# from src.config import config as base_config
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
+
 config = context.config
+# config.set_section_option(
+#     "alembic",
+#     "sqlalchemy.url",
+#     "sqlite:///" + os.path.join(BASE_DIR, 'blog.db')
+# )
+# config.set_section_option("alembic", "prepend_sys_path", base_config.BASE_DIR)
+# config.set_section_option(
+#     "alembic",
+#     "script_location",
+#     os.path.join(
+#         base_config.BASE_DIR, 'infrastructure', 'sqlalchemy', 'migrations'
+#     )
+# )
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
