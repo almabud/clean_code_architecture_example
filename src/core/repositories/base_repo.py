@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class BaseRepo(ABC):
+class AbstractBaseRepo(ABC):
     @abstractmethod
     def create(self, data):
         pass

@@ -1,8 +1,8 @@
-from src.core.repositories.post_repo import PostRepo
+from src.core.repositories.post_repo import AbstractPostRepo
 
 
 class ListPostUseCase:
-    def __init__(self, post_repo: PostRepo):
+    def __init__(self, post_repo: AbstractPostRepo):
         self.post_repo = post_repo
 
     def execute(self):

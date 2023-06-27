@@ -1,10 +1,10 @@
 from src.core.exceptions.exceptions import AuthenticationError
-from src.core.repositories.token_repo import TokenRepo
-from src.core.repositories.user_repo import UserRepo
+from src.core.repositories.token_repo import AbstractTokenRepo
+from src.core.repositories.user_repo import AbstractUserRepo
 
 
 class LoginUseCase:
-    def __init__(self, user_repo: UserRepo, token_repo: TokenRepo):
+    def __init__(self, user_repo: AbstractUserRepo, token_repo: AbstractTokenRepo):
         self.user_repo = user_repo
         self.token_repo = token_repo
 

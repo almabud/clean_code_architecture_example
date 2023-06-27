@@ -2,16 +2,16 @@ from sqlalchemy import select
 
 from src.core.entities.post import Post as PostEntity
 from src.core.exceptions.exceptions import NotFound
-from src.core.repositories.post_repo import PostRepo as BasePostRepo
+from src.core.repositories.post_repo import AbstractPostRepo
 from src.infrastructure.repositories.sqlalchemy.models import (
     Session, Post, User
 )
 from src.infrastructure.repositories.sqlalchemy.sql_alchemy_base_repo import (
-    SqlAlchemyBaseRepo
+    SqlAlchemyAbstractBaseRepo
 )
 
 
-class PostRepo(SqlAlchemyBaseRepo, BasePostRepo):
+class PostRepo(SqlAlchemyAbstractBaseRepo, AbstractPostRepo):
     def list_(self, filters=None):
         res = []
         with Session() as session:

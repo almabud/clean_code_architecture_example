@@ -1,11 +1,11 @@
 from pydantic import validator, error_wrappers, ValidationError
 
 from src.core.entities.user import User
-from src.core.repositories.user_repo import UserRepo
+from src.core.repositories.user_repo import AbstractUserRepo
 
 
 class SignUpUseCase:
-    def __init__(self, user_repo: UserRepo, user: User):
+    def __init__(self, user_repo: AbstractUserRepo, user: User):
         self.user_repo = user_repo
         self.user = user
 

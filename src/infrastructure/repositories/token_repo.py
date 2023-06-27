@@ -1,16 +1,18 @@
 from datetime import datetime, timedelta
 
 import jwt
-from jwt import InvalidTokenError, DecodeError, InvalidSignatureError, \
+from jwt import (
+    InvalidTokenError, DecodeError, InvalidSignatureError,
     ExpiredSignatureError
+)
 
 from src.config import config
 from src.core.entities.token import Token
 from src.core.exceptions.exceptions import InvalidToken, ExpiredToken
-from src.core.repositories.token_repo import TokenRepo
+from src.core.repositories.token_repo import AbstractTokenRepo
 
 
-class JwtTokenRepo(TokenRepo):
+class JwtTokenRepo(AbstractTokenRepo):
     def generate_token(self, user) -> Token:
         encoded = jwt.encode(
             {

@@ -1,5 +1,5 @@
-from .base_repo import BaseRepo
+from .base_repo import AbstractBaseRepo
 
 
-class PostRepo(BaseRepo):
+class AbstractPostRepo(AbstractBaseRepo):
     pass

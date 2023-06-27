@@ -1,8 +1,8 @@
-from src.core.repositories.user_repo import UserRepo
+from src.core.repositories.user_repo import AbstractUserRepo
 
 
 class GetUserUseCase:
-    def __init__(self, user_repo: UserRepo, **filters):
+    def __init__(self, user_repo: AbstractUserRepo, **filters):
         if not filters:
             raise ValueError('filter not provided.')
         self.user_repo = user_repo

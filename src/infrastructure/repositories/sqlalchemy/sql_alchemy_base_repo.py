@@ -1,8 +1,8 @@
 from src.core.exceptions.exceptions import NotFound
-from src.core.repositories.base_repo import BaseRepo
+from src.core.repositories.base_repo import AbstractBaseRepo
 
 
-class SqlAlchemyBaseRepo(BaseRepo):
+class SqlAlchemyAbstractBaseRepo(AbstractBaseRepo):
     def build_filters(self, filters: dict, **kwargs) -> set:
         model = kwargs['model']
         if not filters:

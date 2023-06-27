@@ -4,7 +4,7 @@ from src.core.entities.token import Token
 from src.core.entities.user import User
 
 
-class TokenRepo(ABC):
+class AbstractTokenRepo(ABC):
     @abstractmethod
     def generate_token(self, user: User) -> Token:
         pass

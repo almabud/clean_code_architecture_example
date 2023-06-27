@@ -2,14 +2,14 @@ from sqlalchemy import select
 
 from src.core.entities.user import User as UserEntity
 from src.core.exceptions.exceptions import NotFound
-from src.core.repositories.user_repo import UserRepo as DefaultUserRepo
+from src.core.repositories.user_repo import AbstractUserRepo
 from src.infrastructure.repositories.sqlalchemy.models import Session, User
 from src.infrastructure.repositories.sqlalchemy.sql_alchemy_base_repo import (
-    SqlAlchemyBaseRepo
+    SqlAlchemyAbstractBaseRepo
 )
 
 
-class UserRepo(SqlAlchemyBaseRepo, DefaultUserRepo):
+class UserRepo(SqlAlchemyAbstractBaseRepo, AbstractUserRepo):
     def list_(self, filters=None):
         res = []
         with Session() as session:
