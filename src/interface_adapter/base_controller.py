@@ -36,7 +36,7 @@ def process_request(func):
             return Response(status='error', error=e.errors(), status_code=400)
         except DefaultException as e:
             return Response(
-                status='error', error={'msg': e}, status_code=404
+                status='error', error={'msg': e.message}, status_code=404
             )
 
     return wrapper

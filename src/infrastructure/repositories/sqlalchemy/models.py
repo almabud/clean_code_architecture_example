@@ -43,6 +43,11 @@ class User(AbstractBaseModel):
     )
     is_superuser: Mapped[bool] = mapped_column(Boolean, default=False)
 
+    def __init__(self, **kwargs):
+        # Remove any extra arguments that are not mapped to model columns
+        extra_args = {k: v for k, v in kwargs.items() if hasattr(self, k)}
+        super().__init__(**extra_args)
+
 
 class Post(AbstractBaseModel):
     __tablename__ = 'post'

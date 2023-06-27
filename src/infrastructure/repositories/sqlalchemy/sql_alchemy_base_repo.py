@@ -3,7 +3,8 @@ from src.core.repositories.base_repo import BaseRepo
 
 
 class SqlAlchemyBaseRepo(BaseRepo):
-    def build_filters(self, model, filters={}) -> set:
+    def build_filters(self, filters: dict, **kwargs) -> set:
+        model = kwargs['model']
         if not filters:
             raise ValueError('No filter provided.')
 
