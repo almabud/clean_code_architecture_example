@@ -5,7 +5,7 @@ from pydantic import ValidationError
 from src.core.entities.response import Response
 from src.core.exceptions.exceptions import UnHandleRequest, DefaultException
 from src.interface_adapter.permission import AllowAny
-from src.interface_adapter.request_handler import (
+from src.interface_adapter.request_handler_controller import (
     RequestHandler, AuthenticationHandler
 )
 

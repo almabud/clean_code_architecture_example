@@ -5,5 +5,5 @@ class ListPostUseCase:
     def __init__(self, post_repo: AbstractPostRepo):
         self.post_repo = post_repo
 
-    def execute(self):
-        return self.post_repo.list_()
+    def execute(self, **filters):
+        return self.post_repo.list_(**filters)

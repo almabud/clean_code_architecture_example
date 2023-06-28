@@ -1,16 +1,16 @@
-from pydantic import validator, error_wrappers, ValidationError
+from pydantic import error_wrappers, ValidationError
 
 from src.core.entities.user import User
 from src.core.repositories.user_repo import AbstractUserRepo
 
 
 class SignUpUseCase:
-    def __init__(self, user_repo: AbstractUserRepo, user: User):
+    def __init__(self, user_repo: AbstractUserRepo):
         self.user_repo = user_repo
-        self.user = user
 
-    def execute(self):
-        if self.user_repo.exists(email=self.user.email):
+    def execute(self, data):
+        user = User(**data)
+        if self.user_repo.exists(email=user.email):
             validation_errors = [
                 error_wrappers.ErrorWrapper(
                     exc=ValueError('This Email already exists.'),
@@ -18,7 +18,7 @@ class SignUpUseCase:
                 )
             ]
             raise ValidationError(validation_errors, model=User)
-        self.user.set_password()
-        user = self.user_repo.create(self.user)
+        user.set_password()
+        user = self.user_repo.create(user)
 
         return user

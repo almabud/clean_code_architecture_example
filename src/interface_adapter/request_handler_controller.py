@@ -32,10 +32,10 @@ class AuthenticationHandler(BaseRequestHandler):
                 raise UnHandleRequest('Authorization header not provided.')
             # Extract the token from the Authorization header
             auth_type, token = authorization.split(' ')
-            verify = TokenVerifyUseCase(token_repo, token).execute()
-            user = GetUserUseCase(
-                user_repo=user_repo, identifier=verify.payload.identifier
-            ).execute()
-            self.request.user = RequestUser(**user.dict())
+            verify = TokenVerifyUseCase(token_repo).execute(token)
+            user = GetUserUseCase(user_repo=user_repo).execute(
+                identifier=verify.payload.identifier
+            )
+            self.request.user = RequestUser(**user.dict(), id=user.id)
         except DefaultException as e:
             self.request.user = AnonymousUser()

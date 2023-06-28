@@ -1,14 +1,17 @@
+from src.core.entities.request import Request
 from src.core.exceptions.exceptions import AuthenticationError
 from src.core.repositories.token_repo import AbstractTokenRepo
 from src.core.repositories.user_repo import AbstractUserRepo
 
 
 class LoginUseCase:
-    def __init__(self, user_repo: AbstractUserRepo, token_repo: AbstractTokenRepo):
+    def __init__(
+            self, user_repo: AbstractUserRepo, token_repo: AbstractTokenRepo
+    ):
         self.user_repo = user_repo
         self.token_repo = token_repo
 
-    def execute(self, email: str, password: str):
+    def execute(self, email, password):
         user = self.user_repo.get(email=email)
         if not user.check_password(password):
             raise AuthenticationError

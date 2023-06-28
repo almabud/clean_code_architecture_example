@@ -5,6 +5,6 @@ class ListUserUseCase:
     def __init__(self, user_repo: AbstractUserRepo):
         self.user_repo = user_repo
     
-    def execute(self, filter=None):
-        return self.user_repo.list_()
+    def execute(self, **filters):
+        return self.user_repo.list_(**filters)
     

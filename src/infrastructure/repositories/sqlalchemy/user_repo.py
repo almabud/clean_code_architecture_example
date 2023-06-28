@@ -4,13 +4,13 @@ from src.core.entities.user import User as UserEntity
 from src.core.exceptions.exceptions import NotFound
 from src.core.repositories.user_repo import AbstractUserRepo
 from src.infrastructure.repositories.sqlalchemy.models import Session, User
-from src.infrastructure.repositories.sqlalchemy.sql_alchemy_base_repo import (
+from src.infrastructure.repositories.sqlalchemy.sqlalchemy_base_repo import (
     SqlAlchemyAbstractBaseRepo
 )
 
 
 class UserRepo(SqlAlchemyAbstractBaseRepo, AbstractUserRepo):
-    def list_(self, filters=None):
+    def list_(self, **filters):
         res = []
         with Session() as session:
             res = session.execute(

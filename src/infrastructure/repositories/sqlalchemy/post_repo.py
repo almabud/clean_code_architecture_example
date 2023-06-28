@@ -6,13 +6,13 @@ from src.core.repositories.post_repo import AbstractPostRepo
 from src.infrastructure.repositories.sqlalchemy.models import (
     Session, Post, User
 )
-from src.infrastructure.repositories.sqlalchemy.sql_alchemy_base_repo import (
+from src.infrastructure.repositories.sqlalchemy.sqlalchemy_base_repo import (
     SqlAlchemyAbstractBaseRepo
 )
 
 
 class PostRepo(SqlAlchemyAbstractBaseRepo, AbstractPostRepo):
-    def list_(self, filters=None):
+    def list_(self, **filters):
         res = []
         with Session() as session:
             res = session.execute(

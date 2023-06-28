@@ -10,9 +10,8 @@ class RetrievePostController(BaseController):
     def dispatch(self):
         return Response(
             status='success',
-            data=RetrievePostUseCase(
-                post_repo=PostRepo(),
+            data=RetrievePostUseCase(post_repo=PostRepo()).execute(
                 identifier=UUID(self.request.kwargs.get('identifier'))
-            ).execute(),
+            ),
             status_code=200
         )

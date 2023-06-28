@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 
 from src.interface_adapter.create_post_controller import CreatePostController
 from src.interface_adapter.list_post_controller import ListPostController
-from src.interface_adapter.retrieve_post import RetrievePostController
+from src.interface_adapter.retrieve_post_controller import RetrievePostController
 
 post = Blueprint("post", __name__)
 

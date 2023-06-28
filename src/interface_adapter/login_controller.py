@@ -14,6 +14,9 @@ class LoginController(BaseController):
             status='success',
             data=LoginUseCase(
                 user_repo=UserRepo(), token_repo=JwtTokenRepo()
-            ).execute(**self.request.data),
+            ).execute(
+                email=self.request.data.get('email'),
+                password=self.request.data.get('password')
+            ),
             status_code=200
         )

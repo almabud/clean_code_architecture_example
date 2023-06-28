@@ -13,7 +13,6 @@ class CreatePostController(BaseController):
             status='success',
             data=CreatePostUseCase(
                 post_repo=PostRepo(),
-                data={'author': self.request.user, **self.request.data}
-            ).execute(),
+            ).execute({'author': self.request.user, **self.request.data}),
             status_code=201
         )
