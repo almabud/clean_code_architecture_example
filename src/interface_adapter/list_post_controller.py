@@ -6,8 +6,6 @@ from src.interface_adapter.permission import Authenticated
 
 
 class ListPostController(BaseController):
-    permissions = (Authenticated,)
-
     def dispatch(self):
         return Response(
             status='success',
